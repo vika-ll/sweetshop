@@ -1,0 +1,149 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:t="sap.ui.table"
+        xmlns:u="sap.ui.unified"
+        xmlns:core="sap.ui.core">
+    <Dialog id="productEditDialog"
+            resizable="true"
+            class="sapUiResponsiveContentPadding"
+            contentWidth="450px"
+            contentHeight="auto"
+            draggable="true"
+            titleAlignment="Center"
+            title="{i18n>productAction}">
+		<content>   
+                        <VBox>
+                            <Label
+                                    text="{i18n>productName}"
+                                    required="true"
+                                    labelFor="titleInput" />
+                            <Input 
+                                    id="titleInput"
+                                    rows="12" 
+                                    placeholder="{i18n>productNameText}"
+                                    value="{Product>/title}"
+                                    width="100%" />   
+                        </VBox> 
+                        <Label
+                                text="{i18n>productDescription}"
+                                required="true"
+                                labelFor="descriptionArea" />
+                        <TextArea 
+                                id="descriptionArea"
+                                rows="8" 
+                                maxLength="400"
+                                placeholder="{i18n>productDescriptionText}"
+                                value="{Product>/description}"
+                                width="100%" />  
+                        <VBox>
+                            <Label
+                                    text="{i18n>productPicture}"
+                                    labelFor="fileUploader" />
+                                <HBox>
+                                <u:FileUploader
+                                        id="fileUploader"
+                                        name="myFileUpload"
+                                        width="100%"
+                                        change="onUploadPathChange" />
+                                        <Button
+                                                text="{i18n>productRemovePicture}"
+                                                enabled="{= !!${Product>/picture} &amp;&amp; ${Product>/picture} !== 'REMOVE' }"
+                                                press="handleRemovePress"/>
+                                </HBox>	
+                        </VBox>
+                        
+                        <VBox>
+                            <Label
+                                    text="{i18n>productCategory}"
+                                    required="true"
+                                    labelFor="categorySelect" />	
+                                <Select
+                                    id="categorySelect"
+                                    forceSelection="true"
+                                    width="100%"
+                                    selectedKey="{Product>/category}"
+                                    items="{
+                                        path: 'Categories>/',
+                                        sorter: { path: 'title' }
+                                    }">
+                                    <core:Item key="{Categories>_id}" text="{Categories>title}" />
+                                </Select> 
+                        </VBox>
+                        <Label
+                                text="{i18n>productPrice}"
+                                required="true"
+                                labelFor="priceInput" />	
+                        <Input 
+                                id="priceInput"
+                                placeholder="{i18n>productPriceText}"
+                                type="Number"
+			        value="{Product>/price}"
+			        width="100%" /> 
+
+                        <Label
+                                text="{i18n>productWidth}"
+                                required="true"
+                                labelFor="widthInput" />	
+                        <Input 
+                                id="widthInput"
+                                type="Number"
+                                placeholder="{i18n>productWidthText}"
+			        value="{Product>/attributes/width}"
+			        width="100%" />    
+
+                        <Label
+                                text="{i18n>productHeight}"
+                                required="true"
+                                labelFor="heightInput" />	
+                        <Input 
+                                id="heightInput"
+                                type="Number"
+                                placeholder="{i18n>productHeightText}"
+			        value="{Product>/attributes/height}"
+			        width="100%" />
+
+                        <Label
+                                text="{i18n>productLength}"
+                                required="true"
+                                labelFor="lengthInput" />	
+                        <Input 
+                                id="lengthInput"
+                                placeholder="{i18n>productLengthText}"
+                                type="Number"
+			        value="{Product>/attributes/length}"
+			        width="100%" />
+                        
+                        <Label
+                                text="{i18n>productWeight}"
+                                required="true"
+                                labelFor="weightInput" />	
+                        <Input 
+                                id="weightInput"
+                                type="Number"
+                                placeholder="{i18n>productWeightText}"
+			        value="{Product>/attributes/weight}"
+			        width="100%" />
+
+                         <Label
+                                text="{i18n>productAvailable}"
+                                required="true"
+                                labelFor="availableSelect" />	
+                        <Select
+                                    id="availableSelect"
+                                    forceSelection="true"
+                                    width="100%"
+                                    selectedKey="{Product>/available}"
+                                    items="{
+                                        path: 'Available>/',
+                                        sorter: { path: 'title' }
+                                    }">
+                                    <core:Item key="{Available>key}" text="{Available>title}" />
+                        </Select> 
+        </content>
+        <buttons>
+            <Button 
+                    press=".onProductSaveButtonPress"
+                    text="{i18n>productSave}" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

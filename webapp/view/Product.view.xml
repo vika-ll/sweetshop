@@ -1,0 +1,133 @@
+<mvc:View
+	controllerName="cart.controller.Product"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		backgroundDesign="Solid">
+		<landmarkInfo>
+			<PageAccessibleLandmarkInfo
+				rootRole="Region"
+				rootLabel="{i18n>Product_rootLabel}"
+				contentRole="Main"
+				contentLabel="{i18n>Product_contentLabel}"
+				headerRole="Region"
+				headerLabel="{i18n>Product_headerLabel}"
+				footerRole="Region"
+				footerLabel="{i18n>Product_footerLabel}"/>
+		</landmarkInfo>
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Button
+						type="Back"
+						visible="{appView>/smallScreenMode}"
+						press=".onBack"/>
+				</contentLeft>
+				<contentMiddle>
+					<Title
+						level="H2"
+						text="{ProductDisplay>/title}"/>
+				</contentMiddle>
+				<contentRight>
+					<Button
+						icon="sap-icon://customer"
+						text="{Login>/login}"
+						press=".onAvatarPress"
+						tooltip="{i18n>avatarButtonTooltip}"/>
+					<Button
+						icon="sap-icon://cart-approval"
+						press=".onOrdersPress"
+						text="{i18n>orders}"
+						visible="{Login>/admin}"
+						tooltip="{i18n>ordersButtonTooltip}"/>
+					<ToggleButton
+						icon="sap-icon://cart"
+						text="{i18n>cartTitle}"
+						pressed="{= ${appView>/layout}.startsWith('ThreeColumns') }"
+						tooltip="{i18n>toCartButtonTooltip}"
+						press=".onToggleCart">
+					</ToggleButton>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button
+					text="{i18n>deleteProduct}"
+					type="Reject"
+					visible="{Login>/admin}"
+					press=".onProductDeletePress" />
+				<Button
+					text="{i18n>addToCartShort}"
+					type="Emphasized"
+					press=".onAddToCart" />
+			</Toolbar>
+		</footer>
+		<content>
+			<ObjectHeader
+				title="{ProductDisplay>/title}"
+				titleLevel="H3"
+				number="{
+					path : 'ProductDisplay>/price',
+					formatter : '.formatter.price'
+				}"
+				numberUnit="{i18n>currency}">
+				<attributes>
+					<ObjectAttribute
+						title="{i18n>category}"
+						text="{ProductDisplay>/category/title}"/>
+					<ObjectAttribute
+						title="{i18n>productDescriptionAttributeText}"
+						text="{ProductDisplay>/description}"/>
+					<ObjectAttribute
+						title="{i18n>productWeightAttributeText}"
+						text="{ProductDisplay>/attributes/weight} {i18n>weightMeasure}"/>
+					<ObjectAttribute
+						title="{i18n>productHeightAttributeText}"
+						text="{ProductDisplay>/attributes/height} {i18n>heightMeasure}"/>
+					<ObjectAttribute
+						title="{i18n>productWidthAttributeText}"
+						text="{ProductDisplay>/attributes/width} {i18n>heightMeasure}"/>
+					<ObjectAttribute
+						title="{i18n>productLengthAttributeText}"
+						text="{ProductDisplay>/attributes/length} {i18n>heightMeasure}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus
+						text="{
+							path : 'ProductDisplay>/available',
+							formatter : '.formatter.statusText'
+						}"
+						state="{
+							path : 'ProductDisplay>/available',
+							formatter : '.formatter.statusState'
+						}"/>
+				</statuses>
+			</ObjectHeader>
+			<VBox
+				alignItems="Center"
+				renderType="Div">
+				<Image
+					id="productImage"
+					src="{path : 'ProductDisplay>/picture', formatter : '.formatter.pictureUrl'}"
+					decorative="false"
+					densityAware="false"
+					visible="{= !!${ProductDisplay>/picture}}"
+					class="sapUiSmallMargin"
+					width="600px"
+					height="400px">
+					<detailBox>
+						<LightBox id="lightBox">
+							<imageContent>
+								<LightBoxItem
+									imageSrc="{path : 'ProductDisplay>/picture', formatter : '.formatter.pictureUrl'}" />
+							</imageContent>
+						</LightBox>
+					</detailBox>
+				</Image>
+			</VBox>
+		</content>
+	</Page>
+</mvc:View>

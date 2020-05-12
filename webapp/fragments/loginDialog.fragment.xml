@@ -1,0 +1,71 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:t="sap.ui.table"
+        xmlns:core="sap.ui.core">
+    <Dialog id="loginDialog"
+            resizable="true"
+            class="sapUiResponsiveContentPadding"
+            contentWidth="450px"
+            contentHeight="auto"
+            draggable="true"
+            titleAlignment="Center"
+            title="{i18n>profile}">
+		<content >
+                        <Label
+                                text="{i18n>userName}"
+                                required="true"
+                                labelFor="emailInput" />
+			<Input 
+                                id="emailInput"
+                                enabled="{= !${Login>/token}}"
+			        rows="12" 
+                                placeholder="{i18n>userNameText}"
+			        value="{Login>/login}"
+			        width="100%" />    
+                        <Label
+                                text="{i18n>password}"
+                                required="true"
+                                labelFor="passwordInput" />
+                        <Input 
+                                id="passwordInput"
+			        enabled="true" 
+			        rows="12" 
+                                type="Password"
+				placeholder="{i18n>passwordText}"
+			        value="{Login>/password}"
+			        width="100%" />  
+                        <Label
+                                text="{i18n>newPassword}"
+                                required="true"
+                                visible="{= !!${Login>/token}}"
+                                labelFor="newPasswordInput" />
+                        <Input 
+                                id="newPasswordInput"
+			        enabled="true" 
+			        rows="12" 
+                                type="Password"
+                                visible="{= !!${Login>/token}}"
+				placeholder="{i18n>newPasswordText}"
+			        value="{Login>/new_password}"
+			        width="100%" />          		
+        </content>
+        <buttons>
+            <Button 
+                    press="onLoginButtonPress"
+                    visible="{= !${Login>/token}}"
+                    text="{i18n>login}" />
+            <Button 
+                    press="onLogoutButtonPress"
+                    visible="{= !!${Login>/token}}"
+                    text="{i18n>logout}" /> 
+            <Button 
+                    press="onRegisterButtonPress"
+                    visible="{= !${Login>/token}}"
+                    text="{i18n>register}" />
+            <Button 
+                    press="onChangePasswordButtonPress"
+                    visible="{= !!${Login>/token}}"
+                    text="{i18n>changePassword}" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,41 @@
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:t="sap.ui.table"
+        xmlns:core="sap.ui.core">
+    <Dialog id="categoryDialog"
+            resizable="true"
+            class="sapUiResponsiveContentPadding"
+            contentWidth="450px"
+            contentHeight="auto"
+            draggable="true"
+            title="{i18n>categoryAction}">
+		<content>
+                        <Label
+                                text="{i18n>categoryName}"
+                                required="true"
+                                labelFor="categoryTitleInput" />
+			<Input 
+                                id="categoryTitleInput"
+                                placeholder="{i18n>categoryTitleText}"
+			        value="{Category>/title}"
+			        width="100%" />    
+                        <Label
+                                text="{i18n>categoryDescription}"
+                                labelFor="categoryDescriptionInput" />
+                        <TextArea
+                                id="categoryDescriptionInput"
+			        enabled="true" 
+			        rows="8" 
+                                maxLength="400"
+				placeholder="{i18n>categoryDescriptionText}"
+			        value="{Category>/description}"
+			        width="100%" />     		
+        </content>
+        <buttons>
+            <Button 
+                    press="onCategorySaveButtonPress"
+                    type="Accept"
+                    text="{i18n>save}" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>
